@@ -1,0 +1,34 @@
+leadData = zoho.crm.getRecordById("Leads",lId);
+// info leadData ;
+Created_Time = leadData.get("Created_Time");
+info Created_Time;
+createdMonth = Created_Time.getMonth();
+createdYear = Created_Time.getYear();
+updatemap = Map();
+if(createdMonth == 10 || createdMonth == 11 || createdMonth == 12)
+{
+	newyear = Created_Time.addYear(1);
+	newyear = newyear.getYear();
+	updatemap.put("Years",createdYear + "-" + newyear);
+	updatemap.put("Trimester","Oct - Jan");
+}
+if(createdMonth == 1)
+{
+	newyear = Created_Time.subYear(1);
+	newyear = newyear.getYear();
+	updatemap.put("Years",newyear + "-" + createdYear);
+	updatemap.put("Trimester","Oct - Jan");
+}
+if(createdMonth == 2 || createdMonth == 3 || createdMonth == 4 || createdMonth == 5)
+{
+	updatemap.put("Years",createdYear + "-" + createdYear);
+	updatemap.put("Trimester","Feb - May");
+}
+if(createdMonth == 6 || createdMonth == 7 || createdMonth == 8 || createdMonth == 9)
+{
+	updatemap.put("Years",createdYear + "-" + createdYear);
+	updatemap.put("Trimester","Feb - May");
+}
+info updatemap;
+res = zoho.crm.updateRecord("Leads",lId,updatemap);
+info res;

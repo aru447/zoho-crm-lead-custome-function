@@ -1,0 +1,8 @@
+getdata = zoho.crm.getRecordById("Leads",leadid);
+description_val = getdata.getJSON("Description");
+a = description_val.replaceAll("<(.|\n)*?>"," ").replaceAll("&nbsp;"," ").replaceAll("&amp;","&").replaceAll("</td><td>"," ");
+info a;
+updatemap = Map();
+updatemap.put("Description",a);
+update_data = zoho.crm.updateRecord("Leads",leadid,updatemap);
+info update_data;
